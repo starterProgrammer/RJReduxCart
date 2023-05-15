@@ -1,25 +1,24 @@
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
+import { Products } from './Components/Products';
+import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from 'react-router-dom'
+import { Dashboard } from './Components/Dashboard';
+import { Cart } from './Components/Cart';
+import { RouterLayout } from './Components/RouterLayout'
 function App() {
+
+  const router = createBrowserRouter(createRoutesFromElements(
+    <Route path='/' element={<RouterLayout />}>
+      <Route index element={<Dashboard />}></Route>
+      <Route path="/card" element={<Cart />}></Route>
+    </Route>
+  ))
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RouterProvider router={router} />
     </div>
   );
 }
 
 export default App;
+
